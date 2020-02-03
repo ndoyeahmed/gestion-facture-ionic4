@@ -1,0 +1,154 @@
+<ion-header>
+    <ion-title>
+        Ionic PDF
+    </ion-title>
+    <ion-fab vertical="top" horizontal="end" slot="fixed">
+        <ion-fab-button [disabled]="!listeItem || listeItem.length <= 0 || !totalFactureLettre || !client || !objet"
+                        (click)="createPdf()" translucent="true" mode="md">
+            <ion-icon icon="document"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-header>
+
+<ion-content padding>
+
+    <ion-grid style="margin-top: 7%">
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-label>Format papier</ion-label>
+                    <ion-select (ionChange)="onSelectFormatChange($event)" value="brown" okText="Ok"
+                                cancelText="Annuler">
+                        <ion-select-option *ngFor="let d of pageSizeData" [value]="d.name">
+                            {{d.name}}
+                        </ion-select-option>
+                    </ion-select>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <ion-item>
+                    <ion-radio-group (ionChange)="onChangePageOrientation($event)">
+                        <ion-label>Orientation page</ion-label>
+
+                        <ion-item>
+                            <ion-label>Portrait</ion-label>
+                            <ion-radio slot="start" [value]="pageOrientationData[0].name"></ion-radio>
+                        </ion-item>
+
+                        <ion-item>
+                            <ion-label>Paysage</ion-label>
+                            <ion-radio slot="start" [value]="pageOrientationData[1].name"></ion-radio>
+                        </ion-item>
+                    </ion-radio-group>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+                <div>Choisir logo</div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-button class="small icon-only outline" (click)="AccessCamera()">
+                        <ion-icon name="camera"> Camera</ion-icon>
+                    </ion-button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <ion-button class="small icon-only outline" (click)="AccessGallery()">
+                        <ion-icon name="image"> Gallery</ion-icon>
+                    </ion-button>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div></div>
+            </ion-col>
+        </ion-row>
+        <ion-avatar><img [src]="transform(base64Image)" *ngIf="base64Image" alt="logo"/></ion-avatar>
+
+        <ion-row>
+            <ion-col size="12">
+                <ion-card>
+                    <ion-card-header>
+                        <ion-card-title>
+                            Autres infos
+                        </ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content>
+                        <ion-item>
+                            <ion-label position="floating">Client <strong style="color: red">*</strong></ion-label>
+                            <ion-input name="description" required [(ngModel)]="client"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-label position="floating">Objet <strong style="color: red">*</strong></ion-label>
+                            <ion-input name="description" required [(ngModel)]="objet"></ion-input>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <form #cont="ngForm">
+                <ion-col size="12">
+                    <ion-item>
+                        <ion-label position="floating">Description tâche <strong style="color: red">*</strong>
+                        </ion-label>
+                        <ion-input name="description" required [(ngModel)]="contentObj.description"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-item>
+                        <ion-label position="floating">Montant <strong style="color: red">*</strong></ion-label>
+                        <ion-input name="prix" required type="number" [(ngModel)]="contentObj.prix"></ion-input>
+                    </ion-item>
+                </ion-col>
+
+                <ion-col size="12">
+                    <ion-button expand="block" (click)="addItem()" [disabled]="!cont.valid" mode="md">
+                        ajouter
+                    </ion-button>
+                </ion-col>
+            </form>
+
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">Total facture</ion-label>
+                    <ion-input readonly disabled name="total facture" required type="number"
+                               [(ngModel)]="totalFacture"></ion-input>
+                </ion-item>
+            </ion-col>
+
+            <ion-col size="12">
+                <ion-item>
+                    <ion-label position="floating">Total facture en lettre<strong style="color: red">*</strong>
+                    </ion-label>
+                    <ion-input name="tflettre" required type="text" [(ngModel)]="totalFactureLettre"></ion-input>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col size="12">
+                <ion-card *ngFor="let l of listeItem">
+                    <ion-card-header>
+                        <ion-card-title>{{l.description}}</ion-card-title>
+                    </ion-card-header>
+
+                    <ion-card-content align-items-end>
+                        <ion-item>
+                            <ion-card-title>{{l.prix + 'frcs'}}</ion-card-title>
+                        </ion-item>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

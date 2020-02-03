@@ -1,0 +1,8 @@
+{
+  "name": "gestion-facture",
+  "integrations": {
+    "capacitor": {},
+    "cordova": {}
+  },
+  "type": "angular"
+}

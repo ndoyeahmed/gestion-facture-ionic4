@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "gestion-facture",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}
