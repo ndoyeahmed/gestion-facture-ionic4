@@ -1,5 +1,6 @@
 {
-  "name": "gestion-facture",
+  "name": "senfacturation",
+  "id": "com.gestionfacturation.facture",
   "integrations": {
     "capacitor": {},
     "cordova": {}

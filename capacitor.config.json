@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "gestion-facture",
+  "appId": "com.gestionfacture.facture",
+  "appName": "senfacturation",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
