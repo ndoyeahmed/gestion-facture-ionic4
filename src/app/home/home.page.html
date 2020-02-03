@@ -1,13 +1,13 @@
-<ion-header>
-    <ion-chip>
+<ion-header class="no-border">
+    <ion-toolbar mode="ios">
         <ion-avatar>
             <img alt="logo" src="../../assets/img/logo.png">
         </ion-avatar>
-        <ion-label>SenFacturation</ion-label>
-    </ion-chip>
+        <ion-title class="ion-text-center">SenFacturation</ion-title>
+    </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="padding">
     <ion-fab horizontal="end" slot="fixed" vertical="top">
         <ion-fab-button (click)="createPdf()"
                         [disabled]="!listeItem || listeItem.length <= 0 || !totalFactureLettre || !client || !objet"
